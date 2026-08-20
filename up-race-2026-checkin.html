@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f26b21">
+  <title>UpRace Club Run — Social Check-in</title>
+  <style>
+    :root { --orange:#0944ce; --ink:#1c1b1a; --cream:#f3f7ff; --muted:#667085; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; display:grid; place-items:center; padding:24px; color:var(--ink); background:linear-gradient(145deg,#f7faff 0%,#dce8ff 100%); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    .card { width:min(100%,460px); overflow:hidden; border:1px solid #b8ccff; border-radius:28px; background:rgba(255,255,255,.9); box-shadow:0 20px 60px rgba(9,68,206,.16); }
+    .hero { padding:32px 28px 24px; background:var(--orange); color:#fff; }
+    .eyebrow { margin:0 0 10px; font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; opacity:.88; }
+    h1 { margin:0; font-size:clamp(30px,8vw,42px); line-height:1; letter-spacing:-.04em; }
+    .hero p { margin:14px 0 0; font-size:16px; line-height:1.45; opacity:.95; }
+    main { padding:24px 28px 28px; }
+    .label { margin:0 0 9px; color:var(--muted); font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .copy-box { width:100%; min-height:118px; padding:16px; border:1px solid #c9d8ff; border-radius:16px; background:var(--cream); color:var(--ink); font:inherit; font-size:17px; line-height:1.45; resize:vertical; }
+    .hashtags { color:var(--orange); font-weight:750; }
+    button, a.button { width:100%; min-height:50px; display:flex; align-items:center; justify-content:center; gap:8px; border:0; border-radius:14px; font:inherit; font-weight:800; text-decoration:none; cursor:pointer; }
+    .primary { margin-top:14px; color:#fff; background:var(--ink); }
+    .secondary { margin-top:10px; color:var(--ink); background:#fff; border:1px solid #c9d8ff; }
+    .links { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+    .links a { min-height:44px; color:var(--orange); background:#f0f5ff; border:1px solid #b8ccff; }
+    .status { min-height:20px; margin:12px 0 0; color:#39815c; font-size:13px; font-weight:700; text-align:center; }
+    footer { padding:0 28px 24px; color:var(--muted); font-size:12px; text-align:center; }
+  </style>
+</head>
+<body>
+  <section class="card" aria-label="Check-in mạng xã hội UpRace Club Run">
+    <header class="hero">
+      <p class="eyebrow">Check-in mạng xã hội</p>
+      <h1>UpRace Club Run</h1>
+      <p>Chia sẻ khoảnh khắc chạy bộ và lan tỏa tinh thần UpRace chỉ trong vài giây.</p>
+    </header>
+    <main>
+      <p class="label">Nội dung bài đăng</p>
+      <textarea class="copy-box" id="caption" aria-label="Nội dung có thể chỉnh sửa">Tham gia chạy cùng UpRace Club Run quá vui #UpRace2026 #UpRaceClubRun #UpRacex5050 #5050CoffeeTea</textarea>
+      <button class="primary" id="copyCaption">Sao chép nội dung + hashtag</button>
+      <button class="secondary" id="copyHashtags">Chỉ sao chép hashtag</button>
+      <p class="status" id="status" aria-live="polite"></p>
+      <div class="links">
+        <a class="button" href="https://www.instagram.com/" target="_blank" rel="noopener">Mở Instagram</a>
+        <a class="button" href="https://www.facebook.com/" target="_blank" rel="noopener">Mở Facebook</a>
+      </div>
+    </main>
+    <footer>Chỉnh sửa nội dung, sao chép rồi dán vào bài đăng của bạn.</footer>
+  </section>
+  <script>
+    const hashtags = '#UpRace2026 #UpRaceClubRun #UpRacex5050 #5050CoffeeTea';
+    const status = document.querySelector('#status');
+    const captionField = document.querySelector('#caption');
+    async function copy(text, message) {
+      try {
+        await navigator.clipboard.writeText(text);
+        status.textContent = message;
+      } catch {
+        status.textContent = 'Vui lòng chọn và sao chép nội dung thủ công.';
+      }
+    }
+    document.querySelector('#copyCaption').addEventListener('click', () => copy(captionField.value.trim(), '✓ Đã sao chép nội dung — hãy dán vào bài đăng của bạn.'));
+    document.querySelector('#copyHashtags').addEventListener('click', () => copy(hashtags, '✓ Đã sao chép hashtag — hãy dán vào bài đăng của bạn.'));
+  </script>
+</body>
+</html>

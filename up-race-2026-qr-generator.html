@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tạo mã QR UpRace Club Run</title>
+  <style>body{margin:0;padding:28px;min-height:100vh;display:grid;place-items:center;background:#fff9f2;color:#1c1b1a;font-family:system-ui,sans-serif}.card{width:min(100%,430px);padding:28px;border:1px solid #f3c6a5;border-radius:24px;background:#fff;box-shadow:0 16px 50px #6c371e1c}h1{margin:0 0 8px;font-size:30px}p{color:#756e67;line-height:1.45}label{display:block;margin:20px 0 7px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}input{width:100%;padding:13px;border:1px solid #eadbd0;border-radius:12px;font:inherit}button{width:100%;margin-top:12px;padding:14px;border:0;border-radius:12px;background:#f26b21;color:#fff;font:inherit;font-weight:800;cursor:pointer}#qr{display:block;width:260px;height:260px;margin:24px auto 8px}small{display:block;text-align:center;color:#756e67}</style>
+</head>
+<body><main class="card"><h1>Mã QR UpRace Club Run</h1><p>Đăng tải <b>up-race-2026-checkin.html</b>, dán đường dẫn công khai bên dưới, sau đó lưu hoặc in mã QR.</p><label for="url">Đường dẫn trang check-in</label><input id="url" type="url" placeholder="https://ten-mien-cua-ban.com/up-race-2026-checkin.html"><button id="make">Tạo mã QR</button><img id="qr" alt="Mã QR sẽ xuất hiện ở đây" hidden><small id="hint"></small></main>
+<script>const url=document.querySelector('#url'),qr=document.querySelector('#qr'),hint=document.querySelector('#hint');document.querySelector('#make').onclick=()=>{const value=url.value.trim();if(!value){hint.textContent='Enter the public page URL first.';qr.hidden=true;return}qr.src='https://api.qrserver.com/v1/create-qr-code/?size=700x700&margin=18&data='+encodeURIComponent(value);qr.hidden=false;hint.textContent='QR destination: '+value};</script></body>
+</html>
