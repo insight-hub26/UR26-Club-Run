@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f26b21">
+  <meta name="theme-color" content="#0944ce">
   <title>UpRace Club Run — Social Check-in</title>
   <style>
     :root { --orange:#0944ce; --ink:#1c1b1a; --cream:#f3f7ff; --muted:#667085; }
@@ -24,6 +24,11 @@
     .links { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
     .links a { min-height:44px; color:var(--orange); background:#f0f5ff; border:1px solid #b8ccff; }
     .status { min-height:20px; margin:12px 0 0; color:#39815c; font-size:13px; font-weight:700; text-align:center; }
+    .submit-section { margin-top:26px; padding-top:24px; border-top:1px solid #dbe5ff; }
+    h2 { margin:0 0 8px; font-size:22px; letter-spacing:-.02em; }
+    .helper { margin:0 0 18px; color:var(--muted); font-size:14px; line-height:1.45; }
+    .submission-button { background:var(--orange); padding:12px; text-align:center; }
+    .submit-note { margin:12px 0 0; color:var(--muted); font-size:12px; line-height:1.4; }
     footer { padding:0 28px 24px; color:var(--muted); font-size:12px; text-align:center; }
   </style>
 </head>
@@ -44,6 +49,12 @@
         <a class="button" href="https://www.instagram.com/" target="_blank" rel="noopener">Mở Instagram</a>
         <a class="button" href="https://www.facebook.com/" target="_blank" rel="noopener">Mở Facebook</a>
       </div>
+      <section class="submit-section" aria-labelledby="submit-title">
+        <h2 id="submit-title">Gửi bài đăng để ghi nhận</h2>
+        <p class="helper">Sau khi đăng bài, hãy gửi liên kết hoặc ảnh chụp màn hình để ban tổ chức ghi nhận lượt tham gia.</p>
+        <a class="button primary submission-button" href="https://docs.google.com/forms/d/e/1FAIpQLSeOPQ0GVH-lVTV-Ujm6YvVkBITBxmii89Yj-2NavIbqf-NpNA/viewform" target="_blank" rel="noopener" aria-describedby="submission-note">Gửi bài đăng</a>
+        <p class="submit-note" id="submission-note">Biểu mẫu mở trong tab mới và yêu cầu đăng nhập Google. Nhập tên, chọn gửi liên kết hoặc tải 1 ảnh (tối đa 10 MB), rồi nhấn Gửi. Thông báo xác nhận sẽ xuất hiện khi gửi thành công.</p>
+      </section>
     </main>
     <footer>Chỉnh sửa nội dung, sao chép rồi dán vào bài đăng của bạn.</footer>
   </section>
