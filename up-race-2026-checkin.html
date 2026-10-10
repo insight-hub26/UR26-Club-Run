@@ -27,7 +27,7 @@
     .submit-section { margin-top:26px; padding-top:24px; border-top:1px solid #dbe5ff; }
     h2 { margin:0 0 8px; font-size:22px; letter-spacing:-.02em; }
     .helper { margin:0 0 18px; color:var(--muted); font-size:14px; line-height:1.45; }
-    .submission-button { background:var(--orange); padding:12px; text-align:center; }
+    .submission-frame { display:block; width:100%; height:590px; border:0; background:#fff; border-radius:12px; }
     .submit-note { margin:12px 0 0; color:var(--muted); font-size:12px; line-height:1.4; }
     footer { padding:0 28px 24px; color:var(--muted); font-size:12px; text-align:center; }
   </style>
@@ -52,8 +52,9 @@
       <section class="submit-section" aria-labelledby="submit-title">
         <h2 id="submit-title">Gửi bài đăng để ghi nhận</h2>
         <p class="helper">Sau khi đăng bài, hãy gửi liên kết hoặc ảnh chụp màn hình để ban tổ chức ghi nhận lượt tham gia.</p>
-        <a class="button primary submission-button" href="https://docs.google.com/forms/d/e/1FAIpQLSeOPQ0GVH-lVTV-Ujm6YvVkBITBxmii89Yj-2NavIbqf-NpNA/viewform" target="_blank" rel="noopener" aria-describedby="submission-note">Gửi bài đăng</a>
-        <p class="submit-note" id="submission-note">Biểu mẫu mở trong tab mới và yêu cầu đăng nhập Google. Nhập tên, chọn gửi liên kết hoặc tải 1 ảnh (tối đa 10 MB), rồi nhấn Gửi. Thông báo xác nhận sẽ xuất hiện khi gửi thành công.</p>
+        <iframe class="submission-frame" id="submissionFrame" title="Gửi liên kết hoặc ảnh bài đăng — không cần đăng nhập" src="https://script.google.com/macros/s/AKfycbzzheq1G0zZg-ycVldJjSI3RUfHHtJ1rKwYDJxvt1n-DBapozlpQzCSQjLaJjD6S0Um/exec?authuser=0" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <p class="submit-note" id="submission-note">Gửi ngay tại đây, không cần đăng nhập hay mở trang khác. Vui lòng chờ thông báo “Đã nhận bài đăng của bạn!” để xác nhận gửi thành công.</p>
+        <noscript><p class="submit-note">Vui lòng bật JavaScript để gửi bài đăng trên trang này.</p></noscript>
       </section>
     </main>
     <footer>Chỉnh sửa nội dung, sao chép rồi dán vào bài đăng của bạn.</footer>
@@ -62,6 +63,16 @@
     const hashtags = '#UpRace2026 #UpRaceClubRun #5050CoffeeTea';
     const status = document.querySelector('#status');
     const captionField = document.querySelector('#caption');
+    const submissionFrame = document.querySelector('#submissionFrame');
+    window.addEventListener('message', event => {
+      // Google Apps Script uses a nested googleusercontent.com sandbox frame.
+      // Only accept its numeric resize hint, never HTML or navigation commands.
+      let sender;
+      try { sender = new URL(event.origin); } catch { return; }
+      if (sender.protocol !== 'https:' || !sender.hostname.endsWith('.googleusercontent.com')) return;
+      if (event.data?.type !== 'ur26:form-height' || !Number.isFinite(event.data.height)) return;
+      submissionFrame.style.height = Math.min(1400, Math.max(180, event.data.height)) + 'px';
+    });
     async function copy(text, message) {
       try {
         await navigator.clipboard.writeText(text);
